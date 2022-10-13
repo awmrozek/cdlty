@@ -1,5 +1,4 @@
-My code golf
-============
+# My code golf
 
 This repository contains my solutions to problems
 from site codility and Kattis. Both of them are websites
