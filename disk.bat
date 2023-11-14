@@ -1,0 +1,1 @@
+xcopy *.* H:\SOL\
