@@ -1,5 +1,6 @@
 import tkinter as tk
-from tkinter import colorchooser
+from tkinter import colorchooser, filedialog, messagebox
+from PIL import Image, ImageDraw, ImageTk
 
 class SimplePaint:
     def __init__(self, root):
@@ -9,6 +10,8 @@ class SimplePaint:
 
         self.color = 'black'
         self.brush_size = 5
+        self.image = Image.new("RGB", (800, 600), "white")
+        self.draw = ImageDraw.Draw(self.image)
 
         self.canvas = tk.Canvas(self.root, bg='white')
         self.canvas.pack(fill=tk.BOTH, expand=True)
@@ -21,7 +24,11 @@ class SimplePaint:
         self.menu_bar = tk.Menu(self.root)
 
         self.file_menu = tk.Menu(self.menu_bar, tearoff=0)
+        self.file_menu.add_command(label="New", command=self.new_file)
+        self.file_menu.add_command(label="Open", command=self.open_file)
+        self.file_menu.add_command(label="Save", command=self.save_file)
         self.file_menu.add_command(label="Clear", command=self.clear_canvas)
+        self.file_menu.add_separator()
         self.file_menu.add_command(label="Exit", command=self.root.quit)
         self.menu_bar.add_cascade(label="File", menu=self.file_menu)
 
@@ -36,9 +43,32 @@ class SimplePaint:
         x1, y1 = (event.x - self.brush_size), (event.y - self.brush_size)
         x2, y2 = (event.x + self.brush_size), (event.y + self.brush_size)
         self.canvas.create_oval(x1, y1, x2, y2, fill=self.color, outline=self.color)
+        self.draw.ellipse([x1, y1, x2, y2], fill=self.color, outline=self.color)
 
     def clear_canvas(self):
         self.canvas.delete("all")
+        self.image = Image.new("RGB", (800, 600), "white")
+        self.draw = ImageDraw.Draw(self.image)
+
+    def new_file(self):
+        if messagebox.askokcancel("New File", "Do you want to start a new drawing? Unsaved changes will be lost."):
+            self.clear_canvas()
+
+    def open_file(self):
+        file_path = filedialog.askopenfilename(defaultextension=".png",
+                                               filetypes=[("PNG files", "*.png"), ("All files", "*.*")])
+        if file_path:
+            self.image = Image.open(file_path)
+            self.image = self.image.resize((800, 600), Image.ANTIALIAS)
+            self.draw = ImageDraw.Draw(self.image)
+            self.photo_image = ImageTk.PhotoImage(self.image)
+            self.canvas.create_image(0, 0, image=self.photo_image, anchor=tk.NW)
+
+    def save_file(self):
+        file_path = filedialog.asksaveasfilename(defaultextension=".png",
+                                                 filetypes=[("PNG files", "*.png"), ("All files", "*.*")])
+        if file_path:
+            self.image.save(file_path)
 
     def choose_brush_size(self):
         size = tk.simpledialog.askinteger("Brush Size", "Enter brush size (1-50):", minvalue=1, maxvalue=50)
