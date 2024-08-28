@@ -1,4 +1,4 @@
-// Calculate function y = 1000 + 100 * (x-2020)
+// Calculate function y = 1000 + 100 * (x-2020), don't know why it is accepted the second time
 use std::io::{self, Write};
 
 fn main() {
