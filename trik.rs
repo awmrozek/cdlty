@@ -1,3 +1,4 @@
+// Some text processing with Rust
 use std::io::{self, BufRead};
 
 fn main() -> io::Result<()> {

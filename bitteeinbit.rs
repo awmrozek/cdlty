@@ -1,3 +1,4 @@
+// Print first bit representation of input strint
 use std::io;
 use std::io::Read;
 

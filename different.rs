@@ -1,3 +1,5 @@
+// Print absolute value of difference
+// Keep reading stdin until EOF
 use std::io;
 use std::io::prelude::*;
 use std::fs::File;
