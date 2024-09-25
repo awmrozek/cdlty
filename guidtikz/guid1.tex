@@ -1,0 +1,40 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{amsmath}
+
+\begin{document}
+\begin{tikzpicture}
+    % GUID example: 550e8400-e29b-41d4-a716-446655440000
+    
+    % GUID Parts (in different colors)
+    \node[anchor=west] (guid) at (0,0) {
+        \textcolor{red}{\texttt{550e8400}}-%
+        \textcolor{blue}{\texttt{e29b}}-%
+        \textcolor{green}{\texttt{41d4}}-%
+        \textcolor{orange}{\texttt{a716}}-%
+        \textcolor{purple}{\texttt{446655440000}}
+    };
+    
+    % Draw the colored rectangles behind the GUID parts
+    \draw[red,thick] (guid.south west) ++(0,0.15) -- +(1.75,0) node[above,midway]{\small \texttt{550e8400}} -- ++(0,-0.3);
+    \draw[blue,thick] (guid.south west) ++(1.9,0.15) -- +(0.95,0) node[above,midway]{\small \texttt{e29b}} -- ++(0,-0.3);
+    \draw[green,thick] (guid.south west) ++(2.9,0.15) -- +(0.95,0) node[above,midway]{\small \texttt{41d4}} -- ++(0,-0.3);
+    \draw[orange,thick] (guid.south west) ++(3.9,0.15) -- +(0.95,0) node[above,midway]{\small \texttt{a716}} -- ++(0,-0.3);
+    \draw[purple,thick] (guid.south west) ++(4.9,0.15) -- +(3.0,0) node[above,midway]{\small \texttt{446655440000}} -- ++(0,-0.3);
+    
+    % Legends
+    \node[red]   at (8,0.5)  {\texttt{550e8400} - Part 1 (Timestamp)};
+    \node[blue]  at (8,0.2)  {\texttt{e29b} - Part 2 (Clock Sequence)};
+    \node[green] at (8,-0.1) {\texttt{41d4} - Part 3 (Node Identifier)};
+    \node[orange] at (8,-0.4) {\texttt{a716} - Part 4 (Version)};
+    \node[purple] at (8,-0.7) {\texttt{446655440000} - Part 5 (Random/Sequential)};
+    
+    % Add connecting lines
+    \draw[->,red,thick]   (guid.north east) ++(-6.8,0.1) to[out=60,in=180] ++(2,0.4);
+    \draw[->,blue,thick]  (guid.north east) ++(-5.1,0.1) to[out=60,in=180] ++(3.5,0.1);
+    \draw[->,green,thick] (guid.north east) ++(-4.1,0.1) to[out=60,in=180] ++(3.5,-0.2);
+    \draw[->,orange,thick] (guid.north east) ++(-3.1,0.1) to[out=60,in=180] ++(3.5,-0.5);
+    \draw[->,purple,thick] (guid.north east) ++(-1.0,0.1) to[out=60,in=180] ++(2.7,-0.8);
+
+\end{tikzpicture}
+\end{document}
