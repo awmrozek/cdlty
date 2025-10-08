@@ -8,8 +8,7 @@ Here are some solutions to some of the problems I enjoyed solving with Code@LTH 
 140 words per minute? Check!
 
 This repository contains my solutions to problems
-from site codility and Kattis. Both of them are websites
-for providing online programming contests.
+from Kattis.com and some other websites with programming problems.
 
-These solutions don't have to be most optimal but I enjoy
-solving these assignments whenever I can.
+These solutions are not most optimal.
+Neither can I guarantee that all of them pass 100% of test cases.
